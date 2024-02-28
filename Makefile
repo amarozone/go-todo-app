@@ -13,6 +13,11 @@ integration-test:
 		JAEGER_DISABLED=true \
 		go test -coverpkg ./... ./test/...
 	@docker-compose -f ./docker-compose.test.yml down
+IMAGE_TAG ?= $(if $(GIT_TAG),$(GIT_TAG),$(shell ./tools/image-tag))
+.PHONY: image-tag
+image-tag:
+	@echo $(IMAGE_TAG)
+
 
 .PHONY: integration_test
 
